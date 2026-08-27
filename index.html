@@ -1,0 +1,712 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BENDEFORM — Not just VJing, a visual ritual</title>
+<meta name="description" content="BENDEFORM — 3D artist, projection mapper and live visual performer. Projection mapping, live visuals and immersive 3D worlds. Founder & CEO of NANOCAOS Studios Berlin.">
+<meta name="theme-color" content="#07050D">
+<meta property="og:type" content="website">
+<meta property="og:title" content="BENDEFORM — Not just VJing, a visual ritual">
+<meta property="og:description" content="Projection mapping · live visuals · 3D art. Make architecture move.">
+<meta property="og:image" content="assets/organism-hero.webp">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/logo-192.png">
+<link rel="apple-touch-icon" href="assets/logo-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ─────────────────────────────────────────────
+   BENDEFORM · one-pager
+   Design system from the ENTER THE ORGANISM deck
+   VOID / VIOLET / LILAC / MAGENTA / CYAN / ACID
+   ───────────────────────────────────────────── */
+:root{
+  --void:#07050D; --void-2:#0C0917; --violet:#6B2CF5; --lilac:#C9A9FF;
+  --magenta:#FF2E93; --cyan:#22E8FF; --acid:#C6FF3D;
+  --ink:#F5F1FF; --dim:rgba(245,241,255,.56); --faint:rgba(245,241,255,.34);
+  --line:rgba(201,169,255,.15); --line-2:rgba(201,169,255,.28);
+  --display:"Archivo","Helvetica Neue",Helvetica,sans-serif;
+  --body:"Archivo","Helvetica Neue",Helvetica,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  --gutter:clamp(20px,5vw,72px);
+  --rule:1px solid var(--line);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:clip}
+body{
+  margin:0;background:var(--void);color:var(--ink);
+  font-family:var(--body);font-size:clamp(15px,1.05vw,17px);line-height:1.62;
+  font-weight:380;letter-spacing:.005em;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;height:auto;display:block}
+figure{margin:0}
+a{color:inherit}
+
+/* atmosphere ─────────────────────────────── */
+.aura{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.aura i{position:absolute;display:block;border-radius:50%;filter:blur(110px);opacity:.32}
+.aura i:nth-child(1){width:60vw;height:60vw;left:-18vw;top:-14vw;background:radial-gradient(circle,rgba(107,44,245,.5),transparent 66%)}
+.aura i:nth-child(2){width:52vw;height:52vw;right:-16vw;top:34vh;background:radial-gradient(circle,rgba(255,46,147,.32),transparent 66%)}
+.aura i:nth-child(3){width:46vw;height:46vw;left:24vw;bottom:-22vw;background:radial-gradient(circle,rgba(34,232,255,.22),transparent 66%)}
+.grain{position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.055;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E")}
+.scanline{position:fixed;inset:0;z-index:59;pointer-events:none;opacity:.14;
+  background:repeating-linear-gradient(180deg,rgba(255,255,255,.045) 0 1px,transparent 1px 3px)}
+main,header,footer{position:relative;z-index:1}
+
+/* type primitives ─────────────────────────── */
+.dsp{
+  font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 122,"wght" 800;
+  text-transform:uppercase;line-height:.86;letter-spacing:-.018em;margin:0;
+}
+.h-xl{font-size:clamp(2.35rem,9.5vw,9.5rem);font-variation-settings:"wdth" 112,"wght" 800}
+.h-lg{font-size:clamp(2.3rem,6.4vw,5.4rem)}
+.h-md{font-size:clamp(1.55rem,3.1vw,2.7rem);letter-spacing:-.01em}
+.lbl{font-family:var(--mono);font-size:.66rem;font-weight:400;letter-spacing:.34em;
+  text-transform:uppercase;color:var(--faint)}
+.lbl-a{color:var(--lilac)}
+.lead{font-size:clamp(1.06rem,1.5vw,1.32rem);line-height:1.55;color:rgba(245,241,255,.86);font-weight:350}
+.dim{color:var(--dim)}
+.mono{font-family:var(--mono)}
+.grad{background:linear-gradient(96deg,var(--lilac),var(--magenta) 44%,var(--cyan) 78%,var(--acid));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* layout ─────────────────────────────────── */
+section{padding:clamp(72px,10vw,150px) var(--gutter);border-top:var(--rule)}
+.wrap{max-width:1440px;margin:0 auto}
+.sec-head{display:flex;gap:clamp(16px,4vw,56px);align-items:baseline;flex-wrap:wrap;
+  margin-bottom:clamp(30px,4.4vw,64px)}
+.sec-num{font-family:var(--mono);font-size:.66rem;letter-spacing:.3em;color:var(--magenta);
+  padding-top:.55em;min-width:3.2em}
+.sec-head>div{flex:1 1 62%;min-width:0}
+.sec-head p{max-width:52ch;margin:.9em 0 0}
+
+/* nav ────────────────────────────────────── */
+header{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;
+  align-items:center;gap:16px;padding:16px var(--gutter);
+  background:linear-gradient(180deg,rgba(7,5,13,.86),rgba(7,5,13,0));
+  backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);
+  border-bottom:1px solid transparent;transition:border-color .4s,background .4s}
+header.stuck{border-bottom-color:var(--line);background:rgba(7,5,13,.9)}
+.brand{display:flex;align-items:center;gap:11px;font-family:var(--display);
+  font-variation-settings:"wdth" 118,"wght" 700;
+  text-transform:uppercase;letter-spacing:.2em;font-size:.82rem;text-decoration:none}
+.brand .mark{width:34px;height:34px;flex:none;transition:transform .6s cubic-bezier(.2,.7,.2,1),filter .4s}
+.brand:hover .mark{transform:rotate(-8deg) scale(1.06);filter:drop-shadow(0 0 12px rgba(193,39,45,.55))}
+.brand b{color:var(--lilac);font-weight:inherit}
+nav{display:flex;gap:clamp(12px,1.8vw,30px);align-items:center}
+nav a{font-family:var(--mono);font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--dim);text-decoration:none;transition:color .25s;white-space:nowrap}
+nav a:hover{color:var(--ink)}
+nav a.cta{color:var(--void);background:var(--lilac);padding:.62em 1.05em;border-radius:2px;
+  transition:background .25s,transform .25s}
+nav a.cta:hover{background:var(--acid);transform:translateY(-1px)}
+@media(max-width:720px){nav a:not(.cta){display:none}}
+
+/* hero ───────────────────────────────────── */
+.hero{min-height:100svh;display:grid;place-items:center;position:relative;
+  padding:120px var(--gutter) 76px;border-top:0;overflow:hidden}
+.hero::before{content:"";position:absolute;left:50%;top:50%;width:min(150vw,1500px);height:min(120vh,980px);
+  transform:translate(-50%,-50%);pointer-events:none;z-index:1;
+  background:radial-gradient(closest-side,rgba(7,5,13,.6),rgba(7,5,13,.26) 48%,rgba(7,5,13,0) 80%)}
+.organism{position:absolute;top:50%;left:50%;width:min(74vw,690px);
+  transform:translate(-50%,-50%);mix-blend-mode:screen;opacity:.8;
+  -webkit-mask-image:radial-gradient(closest-side,#000 64%,transparent 94%);
+          mask-image:radial-gradient(closest-side,#000 64%,transparent 94%);
+  animation:breathe 17s ease-in-out infinite;will-change:transform}
+.organism img{width:100%;filter:saturate(1.18) brightness(1.12);animation:spin 190s linear infinite}
+@keyframes breathe{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-51%) scale(1.055)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero-inner{position:relative;z-index:2;text-align:center;max-width:1180px;width:100%;isolation:isolate}
+.hero-inner::before{content:"";position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);
+  width:132%;height:126%;z-index:-1;pointer-events:none;
+  background:radial-gradient(58% 44% at 50% 50%,rgba(7,5,13,.88),rgba(7,5,13,.55) 52%,rgba(7,5,13,0) 78%)}
+.hero h1{position:relative}
+.hero h1 .word{display:block;
+  background:linear-gradient(178deg,#ffffff 4%,#F6F0FF 40%,var(--lilac) 84%,#b78ff5);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  text-shadow:0 0 34px rgba(7,5,13,.9),0 0 90px rgba(107,44,245,.35)}
+.hero-mark{width:clamp(104px,10.5vw,150px);height:auto;margin:0 auto clamp(14px,2vw,24px);
+  padding:clamp(10px,1.4vw,18px);border-radius:50%;box-sizing:content-box;
+  background:radial-gradient(closest-side,rgba(7,5,13,.95),rgba(7,5,13,.8) 62%,rgba(7,5,13,0) 82%);
+  filter:drop-shadow(0 0 30px rgba(7,5,13,.98)) drop-shadow(0 0 52px rgba(193,39,45,.34));
+  animation:markin 1.5s cubic-bezier(.2,.7,.2,1) both}
+@keyframes markin{from{opacity:0;transform:translateY(14px) scale(.94)}to{opacity:1;transform:none}}
+.hero-kicker .lbl{color:rgba(245,241,255,.74);text-shadow:0 1px 14px rgba(7,5,13,.98)}
+.hero-kicker span:not(:last-child)::after{content:"·";margin-left:clamp(9px,1.8vw,24px);color:rgba(201,169,255,.45)}
+.hero-kicker .lbl-a{color:var(--lilac)}
+.hero-kicker{display:flex;justify-content:center;gap:clamp(10px,2vw,26px);flex-wrap:wrap;margin-bottom:clamp(18px,3vw,34px)}
+.hero-sub{margin:clamp(20px,3vw,34px) auto 0;max-width:44ch;font-size:clamp(1rem,1.35vw,1.2rem);
+  color:rgba(245,241,255,.86);text-shadow:0 1px 18px rgba(7,5,13,.95)}
+.hero-sub em{font-style:normal;color:var(--acid)}
+.hero-meta{margin-top:clamp(26px,4vw,46px);display:flex;justify-content:center;gap:clamp(14px,2.6vw,40px);
+  flex-wrap:wrap;border-top:var(--rule);padding-top:18px}
+.hero-meta .lbl{color:rgba(245,241,255,.62);text-shadow:0 1px 16px rgba(7,5,13,.98)}
+.scrollcue{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);display:flex;
+  flex-direction:column;align-items:center;gap:9px}
+.scrollcue span{width:1px;height:42px;background:linear-gradient(var(--lilac),transparent);
+  animation:drop 2.4s ease-in-out infinite}
+@keyframes drop{0%,100%{opacity:.25;transform:scaleY(.5);transform-origin:top}50%{opacity:1;transform:scaleY(1)}}
+
+/* ticker ─────────────────────────────────── */
+.ticker{overflow:hidden;border-top:var(--rule);border-bottom:var(--rule);
+  padding:14px 0;background:rgba(107,44,245,.06)}
+.ticker-track{display:flex;width:max-content;animation:slide 42s linear infinite}
+.ticker-track span{font-family:var(--display);font-variation-settings:"wdth" 120,"wght" 700;
+  text-transform:uppercase;font-size:clamp(.95rem,1.7vw,1.35rem);letter-spacing:.06em;
+  padding:0 clamp(18px,2.4vw,38px);color:rgba(245,241,255,.72);white-space:nowrap}
+.ticker-track span i{font-style:normal;color:var(--magenta)}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* statement ──────────────────────────────── */
+.statement{display:grid;grid-template-columns:1fr;gap:clamp(28px,4vw,64px)}
+@media(min-width:900px){.statement{grid-template-columns:1.15fr .85fr}}
+.quote{font-family:var(--display);font-variation-settings:"wdth" 108,"wght" 600;
+  text-transform:uppercase;font-size:clamp(1.5rem,3.4vw,3rem);line-height:1.02;letter-spacing:-.01em;margin:0}
+.quote small{display:block;font-family:var(--mono);font-size:.64rem;letter-spacing:.3em;
+  color:var(--faint);margin-top:1.6em;text-transform:uppercase;font-weight:400}
+.cols{columns:1;column-gap:48px}
+@media(min-width:1100px){.cols{columns:2}}
+.cols p{margin:0 0 1.15em;break-inside:avoid}
+
+/* organism feature ───────────────────────── */
+.org-feature{border:var(--rule);border-radius:3px;background:
+  radial-gradient(120% 90% at 50% 0%,rgba(107,44,245,.16),transparent 62%),rgba(12,9,23,.5);
+  padding:clamp(24px,4vw,64px)}
+.org-top{display:grid;gap:clamp(24px,3.4vw,56px);align-items:center}
+@media(min-width:960px){.org-top{grid-template-columns:1fr 1fr}}
+.states{display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,1.6vw,22px)}
+.state img{mix-blend-mode:screen;transition:transform .8s cubic-bezier(.2,.7,.2,1),filter .8s}
+.state:hover img{transform:scale(1.05);filter:saturate(1.2)}
+.state figcaption{margin-top:10px;border-top:var(--rule);padding-top:9px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.6vw,20px);
+  margin:clamp(26px,3.4vw,44px) 0 0}
+.stat{border-top:2px solid var(--line-2);padding-top:12px}
+.stat b{display:block;font-family:var(--display);font-variation-settings:"wdth" 118,"wght" 700;
+  font-size:clamp(1.5rem,3.2vw,2.6rem);line-height:1;letter-spacing:-.02em}
+.stat span{display:block;margin-top:8px}
+
+/* phases ─────────────────────────────────── */
+.phases{margin-top:clamp(34px,5vw,72px)}
+.phase-rail{height:2px;background:linear-gradient(90deg,#1b1330,var(--violet),var(--magenta),var(--cyan),var(--acid));
+  margin-bottom:22px;opacity:.9}
+.phase-grid{display:grid;gap:clamp(14px,2vw,24px);grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+.phase{border-left:1px solid var(--line);padding:0 0 0 clamp(12px,1.4vw,20px)}
+.phase h4{font-family:var(--display);font-variation-settings:"wdth" 118,"wght" 700;text-transform:uppercase;
+  font-size:clamp(1.05rem,1.6vw,1.35rem);margin:.5em 0 .45em;letter-spacing:-.005em}
+.phase p{margin:0;font-size:.9rem;color:var(--dim);line-height:1.55}
+.phase:nth-child(1) h4{color:var(--lilac)}
+.phase:nth-child(2) h4{color:#d9b6ff}
+.phase:nth-child(3) h4{color:var(--magenta)}
+.phase:nth-child(4) h4{color:var(--cyan)}
+.phase:nth-child(5) h4{color:var(--acid)}
+.tech{display:grid;gap:clamp(14px,2vw,28px);margin-top:clamp(30px,4vw,56px);
+  grid-template-columns:repeat(auto-fit,minmax(210px,1fr));border-top:var(--rule);padding-top:26px}
+.tech div b{display:block;font-family:var(--mono);font-size:1.02rem;color:var(--ink);letter-spacing:-.01em;margin-bottom:6px}
+.tech div span{font-size:.82rem;color:var(--faint);font-family:var(--mono);letter-spacing:.12em;text-transform:uppercase}
+
+/* DNA + colours ──────────────────────────── */
+.dna{display:grid;gap:0;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));border-top:var(--rule)}
+.dna article{padding:clamp(20px,2.4vw,34px) clamp(14px,1.8vw,26px);border-bottom:var(--rule);
+  border-right:var(--rule);position:relative;overflow:hidden;transition:background .4s}
+.dna article:hover{background:rgba(107,44,245,.09)}
+.dna article::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;
+  background:var(--c,var(--lilac));transition:width .55s cubic-bezier(.2,.7,.2,1)}
+.dna article:hover::after{width:100%}
+.dna h4{font-family:var(--display);font-variation-settings:"wdth" 118,"wght" 700;text-transform:uppercase;
+  font-size:1.15rem;margin:.75em 0 .5em;color:var(--c,var(--lilac))}
+.dna p{margin:0;font-size:.9rem;color:var(--dim)}
+.swatches{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:2px;margin-top:clamp(26px,3vw,44px)}
+.sw{padding:clamp(14px,1.6vw,20px) 14px;min-height:118px;display:flex;flex-direction:column;justify-content:flex-end;
+  background:var(--bg);position:relative;transition:transform .4s}
+.sw:hover{transform:translateY(-4px)}
+.sw b{font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase}
+.sw span{font-family:var(--mono);font-size:.66rem;opacity:.72;margin-top:3px}
+
+/* work ───────────────────────────────────── */
+.work-grid{display:grid;gap:0;grid-template-columns:1fr;border-top:var(--rule)}
+.work-row{display:grid;grid-template-columns:auto 1fr auto;gap:clamp(14px,3vw,40px);align-items:baseline;
+  padding:clamp(16px,2vw,26px) 0;border-bottom:var(--rule);transition:padding-left .45s,color .3s;position:relative}
+.work-row:hover{padding-left:14px;color:#fff}
+.work-row::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--magenta);
+  transform:scaleY(0);transform-origin:bottom;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.work-row:hover::before{transform:scaleY(1)}
+.work-row h4{font-family:var(--display);font-variation-settings:"wdth" 116,"wght" 650;text-transform:uppercase;
+  font-size:clamp(1.05rem,2.1vw,1.72rem);margin:0;letter-spacing:-.01em;line-height:1.05}
+.work-row .role{max-width:46ch;font-size:.88rem;color:var(--dim);margin:0}
+@media(max-width:760px){.work-row{grid-template-columns:auto 1fr}.work-row .role{grid-column:2}}
+.roster{margin-top:clamp(34px,4.6vw,62px);border-top:var(--rule);padding-top:26px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chips span{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;padding:.5em .85em;
+  border:1px solid var(--line-2);border-radius:99px;color:rgba(245,241,255,.78);transition:.3s}
+.chips span:hover{border-color:var(--acid);color:var(--acid)}
+
+/* reel ───────────────────────────────────── */
+.reels{display:grid;gap:clamp(12px,1.6vw,22px);grid-template-columns:repeat(auto-fit,minmax(330px,1fr))}
+.reel{position:relative;border:var(--rule);background:linear-gradient(140deg,#160f2b,#07050D);
+  aspect-ratio:16/9;overflow:hidden;cursor:pointer;padding:0;width:100%;text-align:left;color:inherit;
+  font:inherit;border-radius:2px}
+.reel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.62;
+  transition:opacity .5s,transform .8s cubic-bezier(.2,.7,.2,1)}
+.reel:hover img{opacity:.9;transform:scale(1.06)}
+.reel iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.reel figcaption{position:absolute;left:0;right:0;bottom:0;padding:14px;z-index:2;
+  background:linear-gradient(0deg,rgba(7,5,13,.94),transparent);pointer-events:none}
+.reel h4{font-family:var(--display);font-variation-settings:"wdth" 114,"wght" 650;text-transform:uppercase;
+  font-size:.98rem;margin:6px 0 0;letter-spacing:-.005em;line-height:1.15}
+.play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:54px;height:54px;
+  border:1px solid var(--lilac);border-radius:50%;display:grid;place-items:center;z-index:2;
+  transition:.4s;background:rgba(7,5,13,.4)}
+.reel:hover .play{background:var(--lilac);transform:translate(-50%,-50%) scale(1.1)}
+.play::after{content:"";border-left:11px solid var(--lilac);border-top:7px solid transparent;
+  border-bottom:7px solid transparent;margin-left:3px;transition:.4s}
+.reel:hover .play::after{border-left-color:var(--void)}
+
+/* artist ─────────────────────────────────── */
+.artist{display:grid;gap:clamp(26px,4vw,64px)}
+@media(min-width:900px){.artist{grid-template-columns:.85fr 1.15fr}}
+.portrait{position:relative;align-self:start}
+.portrait img{width:100%;filter:contrast(1.04) saturate(1.05);border-radius:2px}
+.portrait::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 52%,rgba(7,5,13,.55));pointer-events:none}
+.portrait figcaption{margin-top:14px;border-top:var(--rule);padding-top:12px;display:flex;
+  justify-content:space-between;gap:12px;flex-wrap:wrap}
+.stack{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1px;
+  background:var(--line);border:1px solid var(--line);margin-top:clamp(26px,3vw,40px)}
+.stack div{background:var(--void);padding:16px}
+.stack b{display:block;font-family:var(--mono);font-size:.62rem;letter-spacing:.26em;
+  text-transform:uppercase;color:var(--magenta);margin-bottom:8px;font-weight:400}
+.stack p{margin:0;font-size:.92rem;color:rgba(245,241,255,.82)}
+
+/* workshop ───────────────────────────────── */
+.workshop{border:1px solid var(--line-2);border-radius:3px;overflow:hidden;
+  background:radial-gradient(90% 130% at 100% 0%,rgba(255,46,147,.16),transparent 60%),rgba(12,9,23,.55)}
+.ws-in{padding:clamp(24px,4vw,60px);display:grid;gap:clamp(24px,3.4vw,54px)}
+@media(min-width:900px){.ws-in{grid-template-columns:1.25fr .75fr}}
+.steps{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.steps b{font-family:var(--display);font-variation-settings:"wdth" 118,"wght" 700;text-transform:uppercase;
+  font-size:clamp(.95rem,1.7vw,1.3rem);color:rgba(245,241,255,.44);letter-spacing:.02em;transition:color .35s}
+.steps b:hover{color:var(--acid)}
+.facts{display:grid;gap:0;align-content:start;border-top:var(--rule)}
+.facts div{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:var(--rule)}
+.facts span:last-child{color:var(--ink);font-family:var(--mono);font-size:.82rem;text-align:right}
+
+/* contact ────────────────────────────────── */
+.contact{text-align:center;position:relative;overflow:hidden}
+.contact::before{content:"";position:absolute;left:50%;top:54%;width:min(88vw,720px);aspect-ratio:1;
+  transform:translate(-50%,-50%);pointer-events:none;
+  background:url("assets/organism-closed.webp") center/contain no-repeat;mix-blend-mode:screen;opacity:.1;
+  -webkit-mask-image:radial-gradient(closest-side,#000 52%,transparent 88%);
+          mask-image:radial-gradient(closest-side,#000 52%,transparent 88%)}
+.contact .wrap{position:relative;z-index:1}
+.mail{display:inline-block;margin:clamp(20px,3vw,34px) 0 0;text-decoration:none;
+  font-family:var(--display);font-variation-settings:"wdth" 120,"wght" 700;text-transform:uppercase;
+  font-size:clamp(1.35rem,5.2vw,4rem);letter-spacing:-.02em;line-height:1;
+  background:linear-gradient(96deg,var(--lilac),var(--magenta) 50%,var(--cyan));
+  -webkit-background-clip:text;background-clip:text;color:transparent;transition:filter .4s}
+.mail:hover{filter:brightness(1.25) saturate(1.3)}
+.socials{display:flex;justify-content:center;flex-wrap:wrap;gap:clamp(10px,1.6vw,18px);
+  margin-top:clamp(28px,3.6vw,48px)}
+.socials a{text-decoration:none;font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;
+  text-transform:uppercase;border:1px solid var(--line-2);padding:.85em 1.4em;border-radius:2px;
+  color:var(--dim);transition:.32s}
+.socials a:hover{color:var(--void);background:var(--lilac);border-color:var(--lilac);transform:translateY(-2px)}
+footer{padding:26px var(--gutter) 34px;border-top:var(--rule);display:flex;justify-content:space-between;
+  gap:14px;flex-wrap:wrap;align-items:center}
+footer .mark{width:38px;height:38px;flex:none;opacity:.9}
+.contact .mark-lg{width:clamp(70px,7vw,96px);height:auto;margin:0 auto clamp(18px,2.4vw,28px);
+  filter:drop-shadow(0 0 24px rgba(7,5,13,.95))}
+
+/* reveal ─────────────────────────────────── */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+.rv[data-d="1"]{transition-delay:.09s}.rv[data-d="2"]{transition-delay:.18s}
+.rv[data-d="3"]{transition-delay:.27s}.rv[data-d="4"]{transition-delay:.36s}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition-duration:.01ms!important}
+  .rv{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+@media(max-width:760px){
+  .sec-head{gap:6px}
+  .sec-head>div{flex:1 1 100%}
+  .sec-num{padding-top:0;min-width:0}
+  .work-row{grid-template-columns:1fr;gap:7px}
+  .work-row .role{grid-column:1;max-width:none}
+  .stats{grid-template-columns:1fr 1fr}
+}
+::selection{background:var(--magenta);color:#fff}
+</style>
+</head>
+<body>
+<div class="aura" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="scanline" aria-hidden="true"></div>
+
+<header id="top-bar">
+  <a class="brand" href="#top"><img class="mark" src="assets/logo.webp" width="512" height="512" alt="BENDEFORM logo"><span>BENDE<b>FORM</b></span></a>
+  <nav>
+    <a href="#organism">Enter the Organism</a>
+    <a href="#dna">Visual DNA</a>
+    <a href="#work">Work</a>
+    <a href="#reel">Reel</a>
+    <a href="#artist">Artist</a>
+    <a class="cta" href="mailto:me@bendeform.de">Booking</a>
+  </nav>
+</header>
+
+<main id="top">
+
+<!-- HERO ───────────────────────────────── -->
+<section class="hero">
+  <div class="organism" aria-hidden="true"><img src="assets/organism-open.webp" alt="" width="1100" height="1096" fetchpriority="high"></div>
+  <div class="hero-inner">
+    <img class="hero-mark" src="assets/logo.webp" width="512" height="512" alt="BENDEFORM logo" fetchpriority="high">
+    <div class="hero-kicker rv in">
+      <span class="lbl lbl-a">Projection Mapping</span>
+      <span class="lbl">Live Visuals</span>
+      <span class="lbl">3D Art</span>
+    </div>
+    <h1 class="dsp h-xl"><span class="word">Bendeform</span></h1>
+    <p class="hero-sub rv" data-d="1">Not just VJing — <em>a visual ritual.</em><br>
+      Light treated as material. Architecture as something you can shape with it.</p>
+    <div class="hero-meta rv" data-d="2">
+      <span class="lbl">Berlin · Worldwide</span>
+      <span class="lbl">NANOCAOS Studios · Founder</span>
+      <span class="lbl lbl-a">Make Art out of Light</span>
+    </div>
+  </div>
+  <div class="scrollcue" aria-hidden="true"><span></span><em class="lbl" style="font-style:normal">Scroll</em></div>
+</section>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span>Make architecture move <i>✦</i></span><span>Organic <i>·</i> Glass <i>·</i> Portal <i>·</i> Psychedelic <i>·</i> Geometric <i>✦</i></span>
+    <span>The screen disappears <i>✦</i></span><span>The architecture becomes alive <i>✦</i></span>
+    <span>Make architecture move <i>✦</i></span><span>Organic <i>·</i> Glass <i>·</i> Portal <i>·</i> Psychedelic <i>·</i> Geometric <i>✦</i></span>
+    <span>The screen disappears <i>✦</i></span><span>The architecture becomes alive <i>✦</i></span>
+  </div>
+</div>
+
+<!-- STATEMENT ──────────────────────────── -->
+<section id="statement">
+  <div class="wrap statement">
+    <div class="rv">
+      <p class="quote grad">From screen<br>to organism.
+        <small>Artistic statement · BENDEFORM</small></p>
+    </div>
+    <div class="rv" data-d="1">
+      <span class="lbl">01 — Statement</span>
+      <p class="lead" style="margin-top:1.4em">What happens when a visual object stops behaving like content and starts behaving like space?</p>
+      <p class="dim">BENDEFORM works at the intersection of projection mapping, live visual performance and 3D digital worlds. Buildings, stages and rooms are not simply mapped — they become active parts of the visual narrative.</p>
+      <p class="dim">The aesthetic combines liquid-glass materiality, organic growth, psychedelic colour, cellular voids and geometric structures. Deep black creates the surrounding void; lilac, magenta, cyan and acid green become the visual energy of the organism.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ENTER THE ORGANISM ─────────────────── -->
+<section id="organism">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-num">02</span>
+      <div>
+        <span class="lbl">Current work · LPM 2026 Rome</span>
+        <h2 class="dsp h-lg" style="margin-top:.28em">Enter the<br>Organism</h2>
+        <p class="lead">A 10-minute live immersive audiovisual ritual — walls, floor and stage screen composed as one continuous spatial canvas.</p>
+      </div>
+    </div>
+
+    <div class="org-feature rv" data-d="1">
+      <div class="org-top">
+        <div>
+          <span class="lbl lbl-a">Logline</span>
+          <p class="lead" style="margin-top:1em">A mysterious liquid-glass entity emerges from darkness, expands beyond the screen, colonises the architecture and transforms the immersive room into a living organism — before collapsing and being reborn.</p>
+          <p class="dim">The audience begins as an observer. As the entity grows, projections leave the logic of a flat screen and use the walls and floor as continuous spatial tissue. The viewer is gradually placed inside the visual system. The room was never merely containing the artwork — the room itself was the artwork's body.</p>
+          <div class="stats">
+            <div class="stat"><b>10:00</b><span class="lbl">Minutes · fully live</span></div>
+            <div class="stat"><b>1</b><span class="lbl">Continuous canvas</span></div>
+            <div class="stat"><b>5</b><span class="lbl">Phases</span></div>
+          </div>
+        </div>
+        <div class="states">
+          <figure class="state">
+            <img src="assets/organism-closed.webp" alt="Closed state — dense liquid-glass mass" loading="lazy" width="1100" height="1096">
+            <figcaption><span class="lbl lbl-a">Closed state</span><p class="dim" style="margin:.5em 0 0;font-size:.84rem">Dense liquid-glass mass. The organism before the boundary breaks.</p></figcaption>
+          </figure>
+          <figure class="state">
+            <img src="assets/organism-open.webp" alt="Open state — cellular voids and portals" loading="lazy" width="1100" height="1096">
+            <figcaption><span class="lbl lbl-a">Open state</span><p class="dim" style="margin:.5em 0 0;font-size:.84rem">Cellular voids and portals. The organism opening into the room.</p></figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="phases">
+        <span class="lbl">Dramaturgy · five phases · ten minutes</span>
+        <div class="phase-rail" style="margin-top:16px"></div>
+        <div class="phase-grid">
+          <div class="phase"><span class="lbl mono">0:00 – 1:00</span><h4>Void</h4><p>Almost complete darkness. A subtle pulse appears; the first circular structure materialises — isolated and fragile.</p></div>
+          <div class="phase"><span class="lbl mono">1:00 – 3:00</span><h4>Awakening</h4><p>The form begins to breathe. Membranes and internal structures develop. Light starts leaking onto the surrounding walls.</p></div>
+          <div class="phase"><span class="lbl mono">3:00 – 6:00</span><h4>Growth</h4><p>The boundary breaks. Organic structures travel over architectural transitions and surround the audience on all sides.</p></div>
+          <div class="phase"><span class="lbl mono">6:00 – 8:00</span><h4>Collapse</h4><p>The organism becomes unstable. Geometry fractures, perspective distorts, the spatial system accelerates.</p></div>
+          <div class="phase"><span class="lbl mono">8:00 – 10:00</span><h4>Rebirth</h4><p>Darkness returns. The circular seed reappears, transformed — and reframes the entire experience.</p></div>
+        </div>
+      </div>
+  </div>
+</section>
+
+<!-- VISUAL DNA ─────────────────────────── -->
+<section id="dna">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-num">03</span>
+      <div>
+        <span class="lbl">Identity</span>
+        <h2 class="dsp h-lg" style="margin-top:.28em">Visual DNA</h2>
+        <p class="lead">Recognisable without a logo: the circular organism, liquid surface, deep void and neon-organic palette — legible on a stage screen, immersive at room scale.</p>
+      </div>
+    </div>
+
+    <div class="dna rv" data-d="1">
+      <article style="--c:var(--lilac)"><span class="lbl">01</span><h4>Organic</h4><p>Fluid membranes, cellular structures, growth and deformation.</p></article>
+      <article style="--c:#E2D2FF"><span class="lbl">02</span><h4>Glass</h4><p>Transparent, refractive and liquid material behaviour.</p></article>
+      <article style="--c:var(--magenta)"><span class="lbl">03</span><h4>Portal</h4><p>Circular forms recurring as entry points and spatial anchors.</p></article>
+      <article style="--c:var(--cyan)"><span class="lbl">04</span><h4>Psychedelic</h4><p>Colour and transformation create a shifting perceptual field.</p></article>
+      <article style="--c:var(--acid)"><span class="lbl">05</span><h4>Geometric</h4><p>Order, repetition and structure counterbalance the organic.</p></article>
+    </div>
+
+    <div class="swatches rv" data-d="2">
+      <div class="sw" style="--bg:#07050D;border:1px solid var(--line)"><b>Void</b><span>#07050D</span></div>
+      <div class="sw" style="--bg:#6B2CF5"><b>Violet</b><span>#6B2CF5</span></div>
+      <div class="sw" style="--bg:#C9A9FF;color:#07050D"><b>Lilac</b><span>#C9A9FF</span></div>
+      <div class="sw" style="--bg:#FF2E93"><b>Magenta</b><span>#FF2E93</span></div>
+      <div class="sw" style="--bg:#22E8FF;color:#07050D"><b>Cyan</b><span>#22E8FF</span></div>
+      <div class="sw" style="--bg:#C6FF3D;color:#07050D"><b>Acid</b><span>#C6FF3D</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK ───────────────────────────────── -->
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-num">04</span>
+      <div>
+        <span class="lbl">Selected stages</span>
+        <h2 class="dsp h-lg" style="margin-top:.28em">Raised by the<br>underground</h2>
+        <p class="lead">Five years on the international festival circuit — live visuals, projection mapping and light installations.</p>
+      </div>
+    </div>
+
+    <div class="work-grid rv" data-d="1">
+      <div class="work-row"><span class="lbl mono">DE</span><h4>Fusion Festival</h4><p class="role">Live visuals and mapping inside Europe's mother-ship of underground culture.</p></div>
+      <div class="work-row"><span class="lbl mono">DE</span><h4>Feel Festival</h4><p class="role">Stage visuals blending organic imagery with landscape-driven stage architecture.</p></div>
+      <div class="work-row"><span class="lbl mono">DE</span><h4>Wilde Möhre · Circle of Leaves</h4><p class="role">Immersive visual environments for two beloved boutique electronic festivals.</p></div>
+      <div class="work-row"><span class="lbl mono">CH</span><h4>Burning Mountain</h4><p class="role">Visual performance at the Swiss alpine open-air — spatial language on a high-mountain stage.</p></div>
+      <div class="work-row"><span class="lbl mono">DE</span><h4>3000 Grad · Tanz der Bässe · Forrest Explosion</h4><p class="role">Recurring visual direction and projection work across the German open-air circuit.</p></div>
+      <div class="work-row"><span class="lbl mono">DE</span><h4>Lichtkunstfestival Heidenheim</h4><p class="role">Light-art installations in a curated context — the bridge from club stages to museum-grade immersive work.</p></div>
+      <div class="work-row"><span class="lbl mono">BR</span><h4>Guarã Mapping Festival</h4><p class="role">Projection mapping in Brazil — the organism language travelling across scenes and continents.</p></div>
+      <div class="work-row"><span class="lbl mono">SE · TH · TN · AL · MA</span><h4>Psychedelic Freakshow &amp; international stages</h4><p class="role">Sweden, Thailand, Tunis, Albania and Morocco.</p></div>
+      <div class="work-row"><span class="lbl mono">Installation</span><h4>Wood mapping &amp; LED hybrids</h4><p class="role">Custom mapping on sculptural wood stages with integrated LED — the direct ancestor of Enter the Organism.</p></div>
+    </div>
+
+    <div class="roster rv" data-d="2">
+      <span class="lbl lbl-a">Visuals for (selection)</span>
+      <div class="chips">
+        <span>Schiller</span><span>Chase &amp; Status</span><span>Camo &amp; Krooked</span><span>Nicky Romero</span>
+        <span>DJ Rush</span><span>Chicago</span><span>Kollektiv Turmstrasse</span><span>Township Rebellion</span>
+        <span>Thomas Lizzara</span><span>FJAAK</span><span>Egorythmia</span><span>Green Lake Project</span>
+        <span>Lorenzo Raganzini</span><span>Decker</span><span>OctoGoat</span><span>Darksinamutri</span>
+      </div>
+      <div style="margin-top:34px">
+        <span class="lbl lbl-a">Music videos &amp; visualizers</span>
+        <div class="chips">
+          <span>Green Lake Project — Liberate Me · Iboga</span><span>Occer &amp; Prustekuchen — Unite · Iono Music</span>
+          <span>The Droid — Introspect</span><span>SMOL — Decrypting</span><span>PUFF Magic &amp; Hypesteria — C.B.D.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REEL ───────────────────────────────── -->
+<section id="reel">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-num">05</span>
+      <div>
+        <span class="lbl">Moving image</span>
+        <h2 class="dsp h-lg" style="margin-top:.28em">The Reel</h2>
+        <p class="lead">Documentation from stages, festivals and mapping works. Full archive on YouTube.</p>
+      </div>
+    </div>
+    <div class="reels rv" data-d="1" id="reels"></div>
+    <p style="margin-top:30px"><a class="lbl lbl-a" style="text-decoration:none;border-bottom:1px solid var(--line-2);padding-bottom:4px" href="https://www.youtube.com/@bendeform/videos" target="_blank" rel="noopener">All videos on YouTube →</a></p>
+  </div>
+</section>
+
+<!-- ARTIST ─────────────────────────────── -->
+<section id="artist">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-num">06</span>
+      <div>
+        <span class="lbl">Biography</span>
+        <h2 class="dsp h-lg" style="margin-top:.28em">Ben ·<br>Bendeform</h2>
+        <p class="lead">3D artist · projection mapper · live visual performer · Founder &amp; CEO, NANOCAOS Studios Berlin.</p>
+      </div>
+    </div>
+
+    <div class="artist">
+      <figure class="portrait rv" data-d="1" style="margin:0">
+        <img src="assets/bendeform-portrait.webp" alt="Portrait of Ben, the artist behind BENDEFORM" loading="lazy" width="900" height="1020">
+        <figcaption><span class="lbl">Ben · Bendeform</span><span class="lbl lbl-a">Berlin</span></figcaption>
+      </figure>
+
+      <div class="rv" data-d="2">
+        <p class="lead">BENDEFORM is an artist born and raised in the underground.</p>
+        <div class="cols">
+          <p class="dim">His visual language grew where the real magic happens — on forest floors, at free parties and on hand-built stages, among communities that create entire worlds out of light, wood and sound for a single weekend. From that soil the work has risen, carried by the scene itself, all the way onto some of the world's most crispy stages.</p>
+          <p class="dim">In five intense years on the international festival circuit, BENDEFORM has turned stages into moving dreamscapes: visual narratives that extend sound into space, built from organic structures, modular geometry and flowing dynamics. The visuals don't merely accompany the music — they construct atmosphere, tuned to sound, stage design and audience.</p>
+          <p class="dim">The style sits between analogue feel and digital precision: visually dense 3D mapping art and light installations described as belonging "in a futuristic art exhibit or an intergalactic nightclub" — a visual assault, in the best possible way.</p>
+          <p class="dim">As founder and CEO of NANOCAOS Studios Berlin, a multimedia production studio for festival visuals, projection mapping and stage visualisation, he leads the creative 3D and mapping side — from custom visual and spatial concepts, through 3D visualisation, to stage building, mapping and full show operation.</p>
+        </div>
+
+        <div class="stats" style="margin-top:34px">
+          <div class="stat"><b>5</b><span class="lbl">Years · festival circuit</span></div>
+          <div class="stat"><b>8</b><span class="lbl">Territories · DE CH SE TH TN AL MA BR</span></div>
+          <div class="stat"><b>1</b><span class="lbl">Signature · the living organism</span></div>
+        </div>
+
+        <div class="stack">
+          <div><b>Disciplines</b><p>Projection mapping · live visuals · 3D animation · stage design · light installations · show operation</p></div>
+          <div><b>3D / Content</b><p>Blender · Unreal Engine</p></div>
+          <div><b>Mapping / Live</b><p>MadMapper · Resolume · TouchDesigner</p></div>
+          <div><b>Studio</b><p>NANOCAOS Studios Berlin — Founder &amp; CEO</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORKSHOP ───────────────────────────── -->
+<section id="workshop">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-num">07</span>
+      <div>
+        <span class="lbl">Teaching · upcoming</span>
+        <h2 class="dsp h-lg" style="margin-top:.28em">Projection Mapping<br>Workshop</h2>
+      </div>
+    </div>
+    <div class="workshop rv" data-d="1">
+      <div class="ws-in">
+        <div>
+          <p class="lead">What if a building could suddenly breathe, grow or transform?</p>
+          <p class="dim">Projection mapping connects digital images with real architecture. Instead of projecting onto a screen, we work with what is already there: edges, windows, ledges, materials. A hands-on introduction — from the first idea, through the projection, to your own visual composition. No previous experience required.</p>
+          <div class="steps">
+            <b>See</b><b>·</b><b>Design</b><b>·</b><b>Map</b><b>·</b><b>Move</b><b>·</b><b>Experience</b>
+          </div>
+        </div>
+        <div class="facts">
+          <div><span class="lbl">Date</span><span>Sa · 12.09.2026</span></div>
+          <div><span class="lbl">Duration</span><span>2 hours</span></div>
+          <div><span class="lbl">Venue</span><span>Mediathek Bad Krozingen</span></div>
+          <div><span class="lbl">Capacity</span><span>max. 15 people</span></div>
+          <div><span class="lbl">Level</span><span>Beginners welcome</span></div>
+          <div><span class="lbl">Registration</span><span><a href="mailto:me@bendeform.de?subject=Projection%20Mapping%20Workshop%2012.09.2026" style="color:var(--acid)">me@bendeform.de</a></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT ────────────────────────────── -->
+<section id="contact" class="contact">
+  <div class="wrap">
+    <img class="mark-lg rv" src="assets/logo.webp" width="512" height="512" alt="" loading="lazy">
+    <span class="lbl rv">08 — Booking &amp; press</span>
+    <h2 class="dsp h-md rv" data-d="1" style="margin-top:1em">Make architecture move.</h2>
+    <a class="mail rv" data-d="2" href="mailto:me@bendeform.de">me@bendeform.de</a>
+    <div class="socials rv" data-d="3">
+      <a href="https://www.instagram.com/bendeform_vj" target="_blank" rel="noopener">Instagram ↗</a>
+      <a href="https://www.youtube.com/@bendeform" target="_blank" rel="noopener">YouTube ↗</a>
+      <a href="https://www.facebook.com/bendeform" target="_blank" rel="noopener">Facebook ↗</a>
+      <a href="https://nanocaos.framer.website" target="_blank" rel="noopener">NANOCAOS Studios ↗</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <img class="mark" src="assets/logo.webp" width="512" height="512" alt="" loading="lazy">
+  <span class="lbl">© <span id="yr">2026</span> BENDEFORM · Not just VJing — a visual ritual</span>
+  <span class="lbl lbl-a">Make Art out of Light</span>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var videos = [
+    ["NJ20xaKWOtg","Beyond the Void","Stage mapping · Sicaa"],
+    ["cCyJ7Rczh10","Schnackertswies","Festival · with Thomas Lizzara"],
+    ["g9G-YhMWctU","Under the Brigg","Open-air projection"],
+    ["Ndc2XjqsFn8","Spectral","Club mapping · Saarbrücken"],
+    ["3502_D-88zE","Green Lake Project — Liberate Me","Music video"],
+    ["toEz1leSX1w","The Droid — Introspect","Visualizer · 4K"]
+  ];
+  var host = document.getElementById("reels");
+  if(host){
+    videos.forEach(function(v){
+      var b = document.createElement("button");
+      b.className = "reel";
+      b.type = "button";
+      b.setAttribute("aria-label","Play: " + v[1]);
+      b.innerHTML =
+        '<img loading="lazy" referrerpolicy="no-referrer" alt="" onerror="this.style.display=\'none\'" src="https://i.ytimg.com/vi/'+v[0]+'/hqdefault.jpg">'+
+        '<span class="play" aria-hidden="true"></span>'+
+        '<figcaption><span class="lbl">'+v[2]+'</span><h4>'+v[1]+'</h4></figcaption>';
+      b.addEventListener("click", function(){
+        b.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/'+v[0]+'?autoplay=1&rel=0" '+
+          'title="'+v[1].replace(/"/g,"")+'" allow="autoplay; fullscreen; encrypted-media" allowfullscreen></iframe>';
+        b.style.cursor = "default";
+      }, {once:true});
+      host.appendChild(b);
+    });
+  }
+
+  // scroll reveals
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); }
+    });
+  }, {rootMargin:"0px 0px -8% 0px", threshold:0.06});
+  document.querySelectorAll(".rv").forEach(function(el){ io.observe(el); });
+
+  // sticky header state + hero parallax
+  var bar = document.getElementById("top-bar");
+  var org = document.querySelector(".organism");
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var tick = false;
+  function frame(){
+    var y = window.scrollY || 0;
+    bar.classList.toggle("stuck", y > 40);
+    if(org && !reduce){
+      org.style.marginTop = (y * 0.22) + "px";
+      org.style.opacity = Math.max(0, 0.8 - y / 1000);
+    }
+    tick = false;
+  }
+  window.addEventListener("scroll", function(){
+    if(!tick){ tick = true; requestAnimationFrame(frame); }
+  }, {passive:true});
+  frame();
+
+  document.getElementById("yr").textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
